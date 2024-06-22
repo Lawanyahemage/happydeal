@@ -1,0 +1,145 @@
+/* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: url("https://wallpapers.com/images/hd/the-majestic-mahindra-scorpio-on-a-road-trip-8m52s4uij4peq825.jpg") no-repeat center center fixed;
+    background-size: cover; /* Added missing semicolon */
+    display: flex;
+    justify-content: center; /* Ensure content is centered horizontally */
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+
+.logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.logo img {
+    max-width: 170px; /* Adjust as needed */
+    height: 150px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.user_card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8); /* White background with 80% opacity */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    max-height:500px;
+}
+
+#form-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.input-group + .input-group {
+    margin-top: 10px; /* Add space between input groups */
+}
+
+.inline-group-text {
+    background: black;
+    color: white;
+    padding: 10px;
+    min-width: 50px;
+    text-align: center;
+}
+
+.input-group input {
+    border: none;
+    padding: 10px 15px; /* Increase padding */
+    width: 100%;
+    outline: none;
+    font-size: 1rem; /* Increase font size */
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    background: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-actions button:hover {
+    background: #0056b3;
+}
+
+.links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.links a {
+    color: black;
+    text-decoration: ;
+    font-weight: bold;
+}
+
+.links a:hover {
+    color:#0056b3;
+    text-decoration: underline;
+
+}
+
+.terms {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: black;
+}
+
+.terms a {
+    color: black;
+    font-weight: bold;
+    text-decoration: bold;
+}
+
+.terms a:hover {
+    color:#0056b3;
+    text-decoration: underline;
+}
+
+/* Ensure the input group fields are wider */
+.input-group {
+    width: 100%;
+}

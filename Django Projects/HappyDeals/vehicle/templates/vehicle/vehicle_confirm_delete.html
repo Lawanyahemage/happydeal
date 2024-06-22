@@ -1,0 +1,31 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-3">
+        <a class="navbar-brand" href="{% url 'home' %}">Happy Deals</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+
+
+            </ul>
+            <button class="btn btn-outline-success my-2 my-sm-0 text-white" style="border-color: transparent;"  onclick="window.location.href='{% url 'vehicle_list' %}'">Vehicle Details</button>
+        </div>
+    </nav>
+
+
+
+
+<div class="container mt-5 p-4 bg-light rounded shadow">
+    <h2 class="text-center text-danger">Delete Vehicle</h2>
+    <p class="text-center">Are you sure you want to delete <strong>{{ vehicle.name }}</strong>?</p>
+    <form method="post" class="text-center">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm</button>
+        <a href="{% url 'vehicle_list' %}" class="btn btn-secondary ml-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

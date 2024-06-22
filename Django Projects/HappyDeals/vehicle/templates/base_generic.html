@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Happy Deals</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+
+    <style>
+
+        body {
+             background-color: black; /* Slightly darker grey background */
+           }
+
+
+
+
+        .navbar, .slideshow-container {
+            animation-name: slideUp;
+            animation-duration: 2s;
+            animation-timing-function: ease-out;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover,
+        .btn-outline-success:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Light shading effect */
+            border-color: rgba(255, 255, 255, 0.1); /* Make sure the button stays transparent */
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+        {% block content %}
+        {% endblock %}
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>

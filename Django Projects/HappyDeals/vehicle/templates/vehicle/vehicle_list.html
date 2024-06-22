@@ -1,0 +1,43 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-3">
+        <a class="navbar-brand" href="{% url 'home' %}">Happy Deals</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+
+
+            </ul>
+            <button class="btn btn-outline-success my-2 my-sm-0 text-white" style="border-color: transparent;"  onclick="window.location.href='{% url 'home' %}'">admin Logout</button>
+        </div>
+    </nav>
+
+
+
+
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary">Vehicle Details</h2>
+        <a href="{% url 'vehicle_add' %}" class="btn btn-primary">Add New Vehicle</a>
+    </div>
+    <ul class="list-group">
+        {% for vehicle in vehicles %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ vehicle.name }}</strong> - {{ vehicle.vehicle_type }}
+                </div>
+                <div>
+                    <a href="{% url 'vehicle_edit' vehicle.pk %}" class="btn btn-warning btn-sm mr-2">Edit</a>
+                    <a href="{% url 'vehicle_delete' vehicle.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,132 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply styles to the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #003366;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+/* Style for the form box */
+.form-box {
+    width: 48%; /* Adjust width to leave space between boxes */
+    background-color: #001a33;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 2%; /* Add margin to the right for spacing */
+}
+
+.form-box h2 {
+    margin-bottom: 20px;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-fields label {
+    margin-bottom: 5px; /* Adjust spacing between labels */
+    width: 150px; /* Adjust based on your design */
+    text-align: left;
+}
+
+.form-fields input[type="text"],
+.form-fields input[type="date"],
+.form-fields input[type="time"] {
+    padding: 8px;
+    margin-bottom: 10px; /* Adjust spacing between input fields */
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Add a border for clarity */
+    width: calc(100% - 10px); /* Adjust width to leave small space from left border */
+    margin-left: 10px; /* Create small space from left border */
+}
+
+/* Style for the buttons */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.rent-now {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.rent-now:hover {
+    background-color: #218838;
+}
+
+.cancel {
+    background-color: #dc3545;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cancel:hover {
+    background-color: #c82333;
+}
+
+/* Style for the car information box */
+.car-info-box {
+    width: 48%; /* Adjust width to leave space between boxes */
+    background-color: #001a33;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.car-info-box h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.car-info {
+    text-align: left;
+}
+
+.car-info h3 {
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.car-info img {
+    display: block;
+    max-width: 50%;
+    border-radius: 10px;
+    margin: 0 auto 10px;
+}
+
+.car-info p {
+    margin-bottom: 10px;
+    color: #ffffff;
+}

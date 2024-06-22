@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" href="{% static 'css/login_styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="logo">
+        <img src="{% static 'vehicle/images/logo.png' %}" alt="Company Logo">
+    </div>
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <h3 id="form-title">Login to your Account</h3>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <div class="inline-group-text"><i class="fas fa-user"></i></div>
+                        <input type="text" id="id_username" name="username" placeholder="Please enter your username">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="inline-group-text"><i class="fas fa-lock"></i></div>
+                        <input type="password" id="id_password" name="password" placeholder="Please enter your password">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+                <div class="links">
+                    Don't have an account? <a href="{% url 'register' %}">Register</a>
+                </div>
+                <div class="terms">
+                    By signing in, you agree with our
+                    <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/script_login.js' %}"></script>
+</body>
+</html>

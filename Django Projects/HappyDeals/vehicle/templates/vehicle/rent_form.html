@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Vehicle</title>
+    <!-- Load static CSS file -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/form_styles.css' %}">
+    <style>
+        .custom-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: black; /* Light black background */
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Display Django messages -->
+        {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} custom-popup" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="form-container">
+            <!-- Form Box -->
+            <div class="form-box">
+                <h2>Enter Your Information</h2>
+                <div class="form-fields">
+                    <!-- Form for customer information -->
+                    <form id="rentalForm" method="post">
+                        {% csrf_token %}
+                        <label for="customerName">Customer Name</label>
+                        <input type="text" id="customerName" name="customerName" required>
+
+                        <label for="customerPhone">Phone Number</label>
+                        <input type="text" id="customerPhone" name="customerPhone" required>
+
+                        <label for="pickupDate">Pickup Date</label>
+                        <input type="date" id="pickupDate" name="pickupDate" required>
+
+                        <label for="pickupTime">Pickup Time</label>
+                        <input type="time" id="pickupTime" name="pickupTime" required>
+
+                        <label for="returnDate">Return Date</label>
+                        <input type="date" id="returnDate" name="returnDate" required>
+
+                        <!-- Hidden field for car ID -->
+                        <input type="hidden" id="carId" name="carId">
+
+                        <div class="form-buttons">
+                            <button type="button" class="rent-now btn btn-primary" onclick="submitForm()">Rent Now</button>
+                            <button type="button" class="cancel btn btn-secondary" onclick="window.location.href='{% url 'home' %}'">Exit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Car Information Box -->
+            <div class="car-info-box">
+                <h2>Car Information</h2>
+                <div class="car-info">
+                    <h3 id="carName"></h3>
+                     <!-- Show availability message -->
+                    <img id="carImage" src="{{ vehicle.image.url }}" alt="Car Image">
+                    <div id="carDescription"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load static JavaScript file -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+    window.onload = function() {
+        var params = new URLSearchParams(window.location.search);
+        var carName = decodeURIComponent(params.get('carName'));
+
+        // Populate car information
+        document.getElementById('carName').innerText = carName;
+        document.getElementById('carImage').src = decodeURIComponent(params.get('imageUrl'));
+
+        var formDescription = document.getElementById('carDescription');
+
+        // Set common car description
+        formDescription.innerHTML += `
+            <p>Maximum Persons: ${decodeURIComponent(params.get('maxPersons'))}</p>
+            <p>Fuel Efficiency: ${decodeURIComponent(params.get('fuelEfficiency'))}</p>
+            <p>Price per Km: ${decodeURIComponent(params.get('pricePerKm'))}</p>
+        `;
+
+        // Set specific description based on the car
+        switch (carName) {
+            case 'Toyota Corolla AXIO':
+                formDescription.innerHTML += `
+                    <p><strong>Interior Features:</strong> Air conditioning, comfortable cloth seats, spacious trunk</p>
+                    <p><strong>Delivery Options:</strong> Not Available</p>
+                `;
+                break;
+            case 'Toyota Sienna':
+                formDescription.innerHTML += `
+                    <p><strong> Features:</strong> Spacious cabin, comfortable seating, Touchscreen infotainment system, Bluetooth, USB ports</p>
+                    <p><strong>Safety Features:</strong> Toyota Safety Sense suite, including adaptive cruise control, lane departure alert, and pre-collision system</p>
+                    <p><strong>Delivery Options:</strong> Not Available</p>
+                `;
+                break;
+            // Add more cases for other cars as needed
+            default:
+                formDescription.innerHTML += `
+                    <p><strong>Delivery Options:</strong> Not Available</p>
+                `;
+                break;
+        }
+    };
+
+    function submitForm() {
+        var customerName = document.getElementById('customerName').value;
+        var customerPhone = document.getElementById('customerPhone').value;
+        var pickupDate = document.getElementById('pickupDate').value;
+        var pickupTime = document.getElementById('pickupTime').value;
+        var returnDate = document.getElementById('returnDate').value;
+        var carId = document.getElementById('carId').value;
+
+        // Validate form fields
+        if (!customerName || !customerPhone || !pickupDate || !pickupTime || !returnDate) {
+            displayPopup("Please fill in all fields.");
+            return;
+        }
+
+        // Check car availability (example logic, replace with actual implementation)
+        var isCarAvailable = checkCarAvailability(pickupDate, returnDate);
+        if (!isCarAvailable) {
+            displayPopup("Car is already booked for the selected dates.");
+            return;
+        }
+
+        // If all validations pass, submit the form
+        document.getElementById("rentalForm").submit();
+    }
+
+    function checkCarAvailability(pickupDate, returnDate) {
+        // Example logic to check if the car is available for the given dates
+        // Replace with your actual implementation, possibly involving AJAX to Django backend
+        var today = new Date();
+        var pickup = new Date(pickupDate);
+        var returnD = new Date(returnDate);
+
+        if (pickup < today || returnD < pickup) {
+            return false; // Invalid dates
+        }
+
+        return true; // Car is available
+    }
+
+    function displayPopup(message) {
+        var popupContainer = document.createElement('div');
+        popupContainer.classList.add('custom-popup');
+        popupContainer.innerText = message;
+
+        document.body.appendChild(popupContainer);
+
+        // Automatically remove the popup after 1 seconds
+        setTimeout(function() {
+            popupContainer.remove();
+        }, 3000);
+    }
+    </script>
+</body>
+</html>
